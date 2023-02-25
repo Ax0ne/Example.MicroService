@@ -11,22 +11,23 @@
       "DownstreamPathTemplate": "/{url}", // 下游路径模板
       "DownstreamScheme": "https", // 下游的请求scheme http或https
       "LoadBalancerOptions": {
-        "Type": "RoundRobin" // 轮询  LeastConnection:将请求发往最空闲的那个服务器 NoLoadBalance:总是发往第一个
+        "Type": "LeastConnection" // RoundRobin 轮询  LeastConnection:将请求发往最空闲的那个服务器 NoLoadBalance:总是发往第一个
       },
-      "DownstreamHostAndPorts": [ // 下游的地址和端口
-        {
-          "Host": "localhost", // swagger/index.html 
-          "Port": 7002 // WebApi
-        },
-        {
-          "Host": "localhost",
-          "Port": 7003
-        },
-        {
-          "Host": "localhost",
-          "Port": 7004
-        }
-      ]
+      //"DownstreamHostAndPorts": [ // 下游的地址和端口
+      //  {
+      //    "Host": "localhost", // swagger/index.html 
+      //    "Port": 7002 // WebApi
+      //  },
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 7003
+      //  },
+      //  {
+      //    "Host": "localhost",
+      //    "Port": 7004
+      //  }
+      //]
+      "ServiceName": "WebApi",
     },
     //{
     //  "Priority": 1,
@@ -43,6 +44,12 @@
     //}
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5000"
+    "BaseUrl": "https://localhost:5000",
+    "ServiceDiscoveryProvider": {
+      "Scheme": "http",
+      "Host": "127.0.0.1", // Cousul 服务地址
+      "Port": 8500, // Consul端口
+      "Type": "Consul" // 由Consul提供服务发现，每次请求Consul
+    }
   }
 }

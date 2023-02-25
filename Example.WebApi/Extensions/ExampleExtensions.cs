@@ -34,7 +34,7 @@ namespace Example.WebApi.Extensions
                 Check = new AgentServiceCheck
                 {
                     Interval = TimeSpan.FromSeconds(5), // 心跳检查间隔时间
-                    HTTP = $"{host}:{port}/api/example", // 心跳检查地址
+                    HTTP = $"https://{host}:{port}/api/example", // 心跳检查地址
                     Timeout = TimeSpan.FromSeconds(10), // 超时
                     DeregisterCriticalServiceAfter = TimeSpan.FromSeconds(30), // 服务停止后多久注销服务
                 }

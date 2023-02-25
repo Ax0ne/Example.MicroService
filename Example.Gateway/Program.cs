@@ -1,5 +1,6 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Consul;
 
 namespace Example.Gateway
 {
@@ -17,7 +18,10 @@ namespace Example.Gateway
                             true)
                         .AddJsonFile("ocelot.json",false,true)
                         .AddEnvironmentVariables();
-                }).ConfigureServices(cs => { cs.AddOcelot(); }).ConfigureLogging(logging => { logging.AddConsole(); })
+                }).ConfigureServices(cs =>
+                {
+                    cs.AddOcelot().AddConsul();
+                }).ConfigureLogging(logging => { logging.AddConsole(); })
                 //.UseIISIntegration()
                 .Configure(app => { app.UseOcelot().Wait(); })
                 .Build()

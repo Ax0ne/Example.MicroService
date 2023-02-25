@@ -32,7 +32,7 @@ namespace Example.WebApi.Services
 
             var service = result.Response[new Random().Next(0, count)];
 
-            return $"{service.Service.Address}:{service.Service.Port}";
+            return $"https://{service.Service.Address}:{service.Service.Port}";
         }
     }
     //public class ServiceInfo
