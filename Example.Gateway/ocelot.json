@@ -1,0 +1,48 @@
+/*  
+  上游：指的是客户端请求
+  下游：服务端部署的微服务
+*/
+{
+  "Routes": [
+    {
+      "Priority": 2, // 优先级
+      "UpstreamPathTemplate": "/{url}", // 上游路径模板
+      "UpstreamHttpMethod": [ "GET", "POST", "DELETE", "PUT" ], // 上游方法类型
+      "DownstreamPathTemplate": "/{url}", // 下游路径模板
+      "DownstreamScheme": "https", // 下游的请求scheme http或https
+      "LoadBalancerOptions": {
+        "Type": "RoundRobin" // 轮询  LeastConnection:将请求发往最空闲的那个服务器 NoLoadBalance:总是发往第一个
+      },
+      "DownstreamHostAndPorts": [ // 下游的地址和端口
+        {
+          "Host": "localhost", // swagger/index.html 
+          "Port": 7002 // WebApi
+        },
+        {
+          "Host": "localhost",
+          "Port": 7003
+        },
+        {
+          "Host": "localhost",
+          "Port": 7004
+        }
+      ]
+    },
+    //{
+    //  "Priority": 1,
+    //  "UpstreamPathTemplate": "/example/{id}", // 上游路径模板
+    //  "UpstreamHttpMethod": [ "Get" ], // 上游方法类型
+    //  "DownstreamPathTemplate": "/example/{id}", // 下游路径模板
+    //  "DownstreamScheme": "https", // 下游的请求scheme http或https
+    //  "DownstreamHostAndPorts": [ // 下游的地址和端口
+    //    {
+    //      "Host": "localhost", // swagger/index.html 
+    //      "Port": 7003 // OrderApi
+    //    }
+    //  ]
+    //}
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5000"
+  }
+}
