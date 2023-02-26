@@ -28,6 +28,25 @@
       //  }
       //]
       "ServiceName": "WebApi",
+      // 缓存配置，需要Nuget包：Ocelot.Cache.CacheManager
+      //"FileCacheOptions": {
+      //  "TtlSeconds": 10,
+      //  "Region": ""
+      //}
+      //限流配置
+      //"RateLimitOptions": {
+      //  "ClientWhitelist": [ "admin" ], // 白名单
+      //  "EnableRateLimiting": true, // 是否启用限流
+      //  "Period": "10s", // 统计时间段：1s, 5m, 1h, 1d
+      //  "PeriodTimespan": 10, // 多少秒之后客户端可以重试
+      //  "Limit": 5 // 在统计时间段内允许的最大请求数量
+      //},
+      // 熔断配置
+      "QoSOptions": {
+        "ExceptionsAllowedBeforeBreaking": 3, //允许多少个异常请求
+        "DurationOfBreak": 3000, // 熔断的时间5s，单位为ms
+        "TimeoutValue": 3000 //单位ms,如果下游请求的处理时间超过多少则自如将请求设置为超时 默认90秒
+      }
     },
     //{
     //  "Priority": 1,
@@ -50,6 +69,13 @@
       "Host": "127.0.0.1", // Cousul 服务地址
       "Port": 8500, // Consul端口
       "Type": "Consul" // 由Consul提供服务发现，每次请求Consul
-    }
+    },
+    // 限流配置
+    //"RateLimitOptions": {
+    //  "DisableRateLimitHeaders": false,
+    //  "QuotaExceededMessage": "Customize Tips!",
+    //  "HttpStatusCode": 999,
+    //  "ClientIdHeader": "Test"
+    //}
   }
 }

@@ -1,6 +1,7 @@
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
 using Ocelot.Provider.Consul;
+using Ocelot.Provider.Polly;
 
 namespace Example.Gateway
 {
@@ -20,7 +21,7 @@ namespace Example.Gateway
                         .AddEnvironmentVariables();
                 }).ConfigureServices(cs =>
                 {
-                    cs.AddOcelot().AddConsul();
+                    cs.AddOcelot().AddConsul().AddPolly();
                 }).ConfigureLogging(logging => { logging.AddConsole(); })
                 //.UseIISIntegration()
                 .Configure(app => { app.UseOcelot().Wait(); })
